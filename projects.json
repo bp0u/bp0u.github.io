@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Personal Portfolio",
+    "description": "A clean, responsive personal portfolio website built from scratch — featuring dark/light mode, smooth scroll animations, and a dynamic project loader. Designed to showcase projects and skills with a refined, minimal aesthetic.",
+    "tags": ["HTML", "CSS", "JavaScript"],
+    "link": "https://bp0u.github.io/",
+    "linkLabel": "View live"
+  },
+  {
+    "title": "SmartHealth Checker",
+    "description": "An AI-powered web app that predicts possible diseases based on symptoms entered by the user — combining a machine learning model with a clean, accessible interface for fast and reliable health insights.",
+    "tags": ["Python", "Machine Learning", "React", "Node.js", "Docker"],
+    "link": "https://github.com/bp0u/smarthealth-checker",
+    "linkLabel": "View project"
+  }
+]
