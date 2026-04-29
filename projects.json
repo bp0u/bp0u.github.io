@@ -1,0 +1,18 @@
+[
+  {
+    "num": "001",
+    "title": "SmartHealth Checker",
+    "description": "...",
+    "tags": ["Python", "React"],
+    "link": "https://github.com/bp0u/smarthealth-checker",
+    "linkLabel": "View project"
+  },
+  {
+    "num": "002",
+    "title": "Your Next Project",
+    "description": "...",
+    "tags": ["..."],
+    "link": "https://github.com/bp0u/...",
+    "linkLabel": "View project"
+  }
+]
