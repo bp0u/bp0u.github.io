@@ -165,14 +165,18 @@ const fadeObserver = new IntersectionObserver(
   { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
 );
 
-document.querySelectorAll('.fade-up').forEach(el => {
-  const rect = el.getBoundingClientRect();
-  if (rect.top < window.innerHeight) {
-    setTimeout(() => el.classList.add('visible'), 100);
-  } else {
-    fadeObserver.observe(el);
-  }
-});
+// Add js-loaded after a short delay so content is visible first
+setTimeout(() => {
+  document.body.classList.add('js-loaded');
+  document.querySelectorAll('.fade-up').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      setTimeout(() => el.classList.add('visible'), 50);
+    } else {
+      fadeObserver.observe(el);
+    }
+  });
+}, 50);
 
 
 /* ── SKILL BARS: animate width on scroll ── */
