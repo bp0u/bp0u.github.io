@@ -901,6 +901,15 @@ body.js-loaded .fade-up.visible {
   nav.scrolled { padding: 0.75rem 1.5rem; }
   .nav-links { gap: 1.25rem; }
   .nav-social { display: none; }
+  .theme-toggle {
+    position: fixed;
+    top: 0.9rem;
+    right: 1rem;
+    z-index: 260;
+    background: var(--nav-bg);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
 
   #hero { padding: 0 1.5rem; }
   .hero-content { grid-template-columns: 1fr; padding-top: 6rem; }
