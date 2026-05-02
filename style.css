@@ -897,9 +897,19 @@ body.js-loaded .fade-up.visible {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  nav { padding: 1rem 1.5rem; }
-  nav.scrolled { padding: 0.75rem 1.5rem; }
-  .nav-links { gap: 1.25rem; }
+  nav {
+    padding: 1rem 5.2rem 1rem 1.2rem;
+  }
+  nav.scrolled {
+    padding: 0.75rem 5.2rem 0.75rem 1.2rem;
+  }
+  .nav-right { gap: 1rem; }
+  .nav-links {
+    gap: 0.85rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .nav-links a { font-size: 12px; }
   .nav-social { display: none; }
   .theme-toggle {
     position: fixed;
