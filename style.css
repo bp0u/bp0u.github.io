@@ -181,10 +181,14 @@ nav.scrolled {
 
 /* ── THEME TOGGLE ── */
 .theme-toggle {
-  background: none;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 300;
+  background: var(--nav-bg);
   border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 5px 11px;
+  border-radius: 999px;
+  padding: 7px 12px;
   cursor: none;
   font-size: 13px;
   color: var(--ink-2);
@@ -192,6 +196,9 @@ nav.scrolled {
   display: flex;
   align-items: center;
   gap: 5px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: var(--shadow);
 }
 
 .theme-toggle:hover {
@@ -912,13 +919,8 @@ body.js-loaded .fade-up.visible {
   .nav-links a { font-size: 12px; }
   .nav-social { display: none; }
   .theme-toggle {
-    position: fixed;
-    top: 0.9rem;
-    right: 1rem;
-    z-index: 260;
-    background: var(--nav-bg);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    right: 0.85rem;
+    bottom: 0.85rem;
   }
 
   #hero { padding: 0 1.5rem; }
