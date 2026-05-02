@@ -12,5 +12,12 @@
     "tags": ["Python", "Machine Learning", "React", "Node.js", "Docker"],
     "link": "https://github.com/bp0u/smarthealth-checker",
     "linkLabel": "View project"
+  },
+  {
+    "title": "EatSmart",
+    "description": "A heart-healthy nutrition guide web app created for the Global Society of Medicine and Health, featuring DASH meals, intermittent fasting, calorie deficit planning, carb cycling, and a built-in BMR/TDEE calculator.",
+    "tags": ["HTML", "CSS", "JavaScript", "Health"],
+    "link": "https://eat-smart-eight.vercel.app/",
+    "linkLabel": "View live"
   }
 ]
