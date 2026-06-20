@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AERO_BOTICS | NEURAL_ARCHITECT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#3b494b",
+                    "on-primary": "#00363a",
+                    "on-surface": "#e1e1ef",
+                    "tertiary-fixed": "#e2e1f1",
+                    "tertiary": "#f7f4ff",
+                    "surface": "#11131c",
+                    "tertiary-fixed-dim": "#c6c5d4",
+                    "on-tertiary-container": "#5d5e6b",
+                    "surface-container-high": "#282933",
+                    "on-tertiary-fixed-variant": "#454652",
+                    "surface-container-highest": "#32343e",
+                    "inverse-surface": "#e1e1ef",
+                    "surface-bright": "#373943",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#74009f",
+                    "outline": "#849495",
+                    "on-surface-variant": "#b9cacb",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "secondary-fixed-dim": "#ebb2ff",
+                    "tertiary-container": "#d9d8e8",
+                    "on-primary-container": "#006970",
+                    "secondary-container": "#b600f8",
+                    "primary-container": "#00f0ff",
+                    "background": "#11131c",
+                    "on-primary-fixed-variant": "#004f54",
+                    "on-tertiary": "#2f303b",
+                    "surface-variant": "#32343e",
+                    "secondary": "#ebb2ff",
+                    "inverse-on-surface": "#2e303a",
+                    "on-tertiary-fixed": "#1a1b26",
+                    "primary": "#dbfcff",
+                    "surface-container-low": "#191b24",
+                    "surface-container-lowest": "#0c0e17",
+                    "inverse-primary": "#006970",
+                    "primary-fixed-dim": "#00dbe9",
+                    "surface-tint": "#00dbe9",
+                    "on-background": "#e1e1ef",
+                    "secondary-fixed": "#f8d8ff",
+                    "on-secondary": "#520072",
+                    "surface-container": "#1d1f29",
+                    "on-primary-fixed": "#002022",
+                    "on-secondary-container": "#fff6fc",
+                    "primary-fixed": "#7df4ff",
+                    "on-secondary-fixed": "#320047",
+                    "surface-dim": "#11131c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "unit": "4px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["sora"],
+                    "body-lg": ["jetbrainsMono"],
+                    "headline-lg-mobile": ["sora"],
+                    "body-md": ["jetbrainsMono"],
+                    "label-sm": ["jetbrainsMono"],
+                    "headline-lg": ["sora"],
+                    "headline-md": ["sora"]
+            },
+            "fontSize": {
+                    "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #11131c;
+            color: #e1e1ef;
+            overflow-x: hidden;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .scanline-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 50;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .grid-bg {
+            background-image: radial-gradient(circle, rgba(0, 219, 233, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .pipeline-node {
+            width: 4px;
+            height: 4px;
+            background: #00dbe9;
+            box-shadow: 0 0 8px #00dbe9;
+            position: absolute;
+        }
+
+        .parallax-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .parallax-target {
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            background-color: rgba(17, 19, 28, 0.8);
+        }
+
+        .cyan-glow:hover {
+            box-shadow: 0 0 15px rgba(0, 219, 233, 0.4);
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+            70% { opacity: 0.9; }
+        }
+
+        .flicker-effect {
+            animation: flicker 2s infinite;
+        }
+    </style>
+</head>
+<body class="dark selection:bg-primary-container selection:text-on-primary-container">
+<div class="scanline-overlay"></div>
+<div class="grid-bg fixed inset-0 z-0"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 left-0 right-0 z-[100] border-b border-outline-variant/30 glass-nav shadow-[0_0_15px_rgba(0,219,233,0.1)]">
+<nav class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="flex items-center gap-2 group">
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-primary-fixed-dim uppercase">AERO_BOTICS</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-primary-fixed-dim border-b-2 border-primary-fixed-dim pb-1 uppercase" href="#">Systems</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed-dim transition-colors uppercase" href="#">Pipeline</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed-dim transition-colors uppercase" href="#">Research</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary-fixed-dim transition-colors uppercase" href="#">Terminal</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex items-center gap-4 text-on-surface-variant">
+<button class="hover:bg-primary/10 hover:text-primary transition-all duration-300 p-2 rounded">
+<span class="material-symbols-outlined">settings_input_component</span>
+</button>
+<button class="hover:bg-primary/10 hover:text-primary transition-all duration-300 p-2 rounded">
+<span class="material-symbols-outlined">terminal</span>
+</button>
+</div>
+<button class="px-6 py-2 border border-primary-fixed-dim text-primary-fixed-dim font-label-sm uppercase hover:bg-primary-fixed-dim hover:text-surface transition-all active:scale-95 duration-300">
+                    Deploy
+                </button>
+</div>
+</nav>
+</header>
+<main class="relative z-10 pt-20">
+<!-- Hero Section -->
+<section class="relative h-screen flex flex-col items-center justify-center overflow-hidden px-margin-mobile md:px-margin-desktop">
+<!-- Parallax Background Robot -->
+<div class="parallax-container absolute inset-0 flex items-center justify-center z-0 pointer-events-none">
+<div class="parallax-target relative w-full max-w-4xl opacity-60 md:opacity-100">
+<img class="w-full h-auto object-contain scale-110 drop-shadow-[0_0_50px_rgba(0,219,233,0.2)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD722egvqncS91iRs2UojBXgZ5ybrzU8b6LXORO3VNJkNYS6gIStJ_6JFJ53yPGXsnh6cnw1Z-k9uZ52QDzt3CJTZrchwEun_FmYvPHSHI4V8nQKfzlyhw7dC2GkTqJRjY_br2xMCj1LxR0hbxuCjeEscryLdkGBaxDMB5xRVY3HINoMKs41NdK8-roXdQ96phNRu-1sqVUrkqFi1Wv0vbnMf7pLJz7dE_zYY4UsR9RVWm6GK5NLAHunN8tE7o1eWFFXGuM4fI0UA"/>
+</div>
+</div>
+<!-- Hero Content -->
+<div class="relative z-20 text-center flex flex-col items-center">
+<div class="inline-flex items-center gap-2 mb-6 px-3 py-1 border border-primary-fixed-dim/30 bg-surface/50 backdrop-blur-sm rounded-sm">
+<span class="w-2 h-2 bg-primary-fixed-dim rounded-full flicker-effect"></span>
+<span class="font-label-sm text-label-sm text-primary-fixed-dim uppercase tracking-[0.2em]">Core Protocol v4.0.2</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-white mb-4 tracking-tighter uppercase drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+                    NEURAL_ARCHITECT
+                </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-12 uppercase tracking-wide">
+                    The intersection of autonomous logic and structural precision. Building the future of kinetic intelligence.
+                </p>
+<div class="flex flex-col sm:flex-row gap-6">
+<button class="group relative px-10 py-4 bg-primary-fixed-dim text-surface font-bold uppercase overflow-hidden hover:shadow-[0_0_25px_rgba(0,219,233,0.5)] transition-all">
+<span class="relative z-10">Access Archives</span>
+<div class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 skew-x-12"></div>
+</button>
+<button class="px-10 py-4 border border-outline-variant text-on-surface-variant font-bold uppercase hover:border-primary-fixed-dim hover:text-primary-fixed-dim transition-all">
+                        System Diagnostics
+                    </button>
+</div>
+</div>
+<!-- Background Data Flow (Pipeline nodes) -->
+<div class="absolute bottom-0 left-margin-desktop top-0 w-px bg-outline-variant/30 hidden lg:block">
+<div class="pipeline-node top-1/4 -left-[2px]"></div>
+<div class="pipeline-node top-3/4 -left-[2px]"></div>
+</div>
+<div class="absolute bottom-0 right-margin-desktop top-0 w-px bg-outline-variant/30 hidden lg:block">
+<div class="pipeline-node top-1/3 -right-[2px]"></div>
+<div class="pipeline-node top-2/3 -right-[2px]"></div>
+</div>
+</section>
+<!-- Bento Grid Portfolio Section -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="flex items-center gap-4 mb-16">
+<h2 class="font-headline-lg text-headline-lg text-white uppercase tracking-tighter">Current_Deployments</h2>
+<div class="flex-grow h-px bg-outline-variant/30 relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border border-primary-fixed-dim rotate-45"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Large Feature -->
+<div class="md:col-span-8 group relative overflow-hidden border border-outline-variant/50 bg-surface-container-low h-[500px]">
+<div class="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity">
+<div class="w-full h-full bg-cover bg-center" data-alt="A cinematic, wide-angle shot of a sleek white robotic assembly arm in a high-tech laboratory with glowing cyan data streams. Modern industrial futurism style, high contrast, dark midnight background with sharp laboratory lighting." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuClhPXy3k-TXfINgrpBz6Ma69mjh11BNhtv_JLMQXbL4k6HFelKx7DEjT0ExNXYOT333ZOCTB5NPfKDeA12n8cwgEgjyxyjuZ2epiA8b3KlxO6UX8SnurTSUPtTARguMz_IBj_viDYVPJIDQwSkD-5lNau0QW26KO2ySfH2cOKzP7HWvuZC7RF8TNzZVCWqd_BRvRFN0LWJP_WMeKZl_rngbij-nejja-km-1sHmTeqSuFYgwNEzLnXXRjI3l38ORyyKC_rmQxHig')"></div>
+</div>
+<div class="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-surface to-transparent">
+<div class="mb-2">
+<span class="px-2 py-1 bg-secondary-container/20 text-secondary border border-secondary/30 font-label-sm text-label-sm uppercase">Active Node</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-white mb-2 uppercase">Protocol_Alpha_9</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg uppercase">Next-generation spatial awareness engine for high-altitude drone swarms.</p>
+</div>
+<div class="absolute top-4 right-4 p-2 bg-surface/80 border border-outline-variant">
+<span class="material-symbols-outlined text-primary-fixed-dim">sensors</span>
+</div>
+</div>
+<!-- Small Grid Items -->
+<div class="md:col-span-4 grid grid-rows-2 gap-gutter">
+<div class="border border-outline-variant/50 bg-surface-container-low p-8 flex flex-col justify-between group hover:border-primary-fixed-dim transition-all">
+<div class="flex justify-between">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-fixed-dim">memory</span>
+<span class="font-label-sm text-on-surface-variant">001</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-white mb-2 uppercase">Neural_Link</h4>
+<p class="font-label-sm text-on-surface-variant uppercase">Biometric interface architecture</p>
+</div>
+</div>
+<div class="border border-outline-variant/50 bg-surface-container-low p-8 flex flex-col justify-between group hover:border-primary-fixed-dim transition-all">
+<div class="flex justify-between">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-fixed-dim">precision_manufacturing</span>
+<span class="font-label-sm text-on-surface-variant">002</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-white mb-2 uppercase">Kinetic_OS</h4>
+<p class="font-label-sm text-on-surface-variant uppercase">Real-time motion control kernel</p>
+</div>
+</div>
+</div>
+<!-- Lower Row -->
+<div class="md:col-span-4 border border-outline-variant/50 bg-surface-container-low p-8 h-[300px] flex flex-col justify-end">
+<h4 class="font-headline-md text-headline-md text-white mb-2 uppercase">Terminal_Output</h4>
+<div class="space-y-1 font-label-sm text-[10px] text-primary-fixed-dim/60 uppercase">
+<p>&gt; init search_sequence...</p>
+<p>&gt; node_883 connection established</p>
+<p>&gt; downloading neural_maps [77%]</p>
+</div>
+</div>
+<div class="md:col-span-8 border border-outline-variant/50 bg-surface-container-low relative overflow-hidden h-[300px]">
+<div class="absolute inset-0 opacity-20">
+<div class="w-full h-full bg-cover bg-center" data-alt="Close-up of highly intricate micro-circuitry with glowing purple and cyan power traces. High-performance industrial technology aesthetic, macro photography style, extreme detail, dark background." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCLPsARoMhCyWVkTnrzwpJGxNdxXR_M-GfvEokzmoniBAqewiCjL4iNWJ9W--s8V0li8Lc_Ceep8hzXBL926dsCvcNdvtM1diZVqyBc8sHyvyD4FmWWFZuWtExtZBXU6vqEfQvqovyG5K42i8xSj9ebTgxndpP8GWU6Loie0Bc7iiw0mUQTJwSjQgI2Cl7xiBhTnRJ2iAq7oBWRt0oRay_HY0ZFQlX2wO7x4-SBuZHTQG7bVWEsaMrqEOS72J4tlZENfdeRgL_32A')"></div>
+</div>
+<div class="relative z-10 p-8 h-full flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<h4 class="font-headline-md text-headline-md text-white uppercase max-w-xs">Autonomous_Grid Management</h4>
+<span class="material-symbols-outlined text-primary-fixed-dim text-4xl">grid_view</span>
+</div>
+<button class="w-fit px-6 py-2 border border-primary-fixed-dim text-primary-fixed-dim font-label-sm uppercase hover:bg-primary-fixed-dim hover:text-surface transition-all">View Specs</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Technical Specs Table -->
+<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="border-l-4 border-primary-fixed-dim pl-8 mb-12">
+<h2 class="font-headline-lg text-headline-lg text-white uppercase tracking-tighter">System_Status</h2>
+<p class="font-body-md text-on-surface-variant">Real-time telemetry and hardware validation logs.</p>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="border-b border-outline-variant/50">
+<tr>
+<th class="py-4 font-label-sm text-label-sm text-on-surface-variant uppercase">Module_ID</th>
+<th class="py-4 font-label-sm text-label-sm text-on-surface-variant uppercase">Status</th>
+<th class="py-4 font-label-sm text-label-sm text-on-surface-variant uppercase">Load</th>
+<th class="py-4 font-label-sm text-label-sm text-on-surface-variant uppercase">Latency</th>
+<th class="py-4 font-label-sm text-label-sm text-on-surface-variant uppercase">Runtime</th>
+</tr>
+</thead>
+<tbody class="font-body-md">
+<tr class="border-b border-outline-variant/20 hover:bg-primary/5 transition-colors">
+<td class="py-6 text-white font-bold">CORE_LOGIC_V4</td>
+<td class="py-6"><span class="px-2 py-0.5 bg-green-500/10 text-green-400 text-xs uppercase border border-green-500/20">Operational</span></td>
+<td class="py-6 text-on-surface-variant">14.2%</td>
+<td class="py-6 text-on-surface-variant">0.02ms</td>
+<td class="py-6 text-on-surface-variant">142:22:04</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-primary/5 transition-colors">
+<td class="py-6 text-white font-bold">SPATIAL_SENSE_B</td>
+<td class="py-6"><span class="px-2 py-0.5 bg-primary-container/10 text-primary-fixed-dim text-xs uppercase border border-primary-fixed-dim/20">Syncing</span></td>
+<td class="py-6 text-on-surface-variant">68.9%</td>
+<td class="py-6 text-on-surface-variant">4.10ms</td>
+<td class="py-6 text-on-surface-variant">00:12:45</td>
+</tr>
+<tr class="border-b border-outline-variant/20 hover:bg-primary/5 transition-colors">
+<td class="py-6 text-white font-bold">HAPTIC_FEEDBACK</td>
+<td class="py-6"><span class="px-2 py-0.5 bg-green-500/10 text-green-400 text-xs uppercase border border-green-500/20">Operational</span></td>
+<td class="py-6 text-on-surface-variant">05.1%</td>
+<td class="py-6 text-on-surface-variant">0.01ms</td>
+<td class="py-6 text-on-surface-variant">892:10:12</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant py-12">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop w-full max-w-container-max mx-auto gap-8">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-headline-sm text-headline-sm text-primary font-bold uppercase">AERO_BOTICS</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest opacity-60">©2024 NEURAL_LINK INDUSTRIES. ALL RIGHTS RESERVED.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-sm text-label-sm text-on-tertiary-container hover:text-primary-fixed-dim transition-colors uppercase" href="#">Terminal_Access</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container hover:text-primary-fixed-dim transition-colors uppercase" href="#">System_Status</a>
+<a class="font-label-sm text-label-sm text-on-tertiary-container hover:text-primary-fixed-dim transition-colors uppercase" href="#">Network_Node</a>
+</div>
+<div class="flex gap-4">
+<div class="w-8 h-8 border border-outline-variant flex items-center justify-center hover:border-primary-fixed-dim cursor-pointer transition-colors opacity-70 hover:opacity-100">
+<span class="material-symbols-outlined text-[18px]">share</span>
+</div>
+<div class="w-8 h-8 border border-outline-variant flex items-center justify-center hover:border-primary-fixed-dim cursor-pointer transition-colors opacity-70 hover:opacity-100">
+<span class="material-symbols-outlined text-[18px]">database</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Mouse Tracking Parallax Effect
+        const container = document.querySelector('.parallax-container');
+        const target = document.querySelector('.parallax-target');
+
+        document.addEventListener('mousemove', (e) => {
+            if (!target) return;
+
+            const { clientX, clientY } = e;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            // Calculate rotation based on cursor distance from center
+            // Limit the movement to subtle ranges for professional feel
+            const moveX = (clientX - centerX) / 50; 
+            const moveY = (clientY - centerY) / 50;
+
+            const rotateX = (centerY - clientY) / 100;
+            const rotateY = (clientX - centerX) / 100;
+
+            // Apply transformation
+            // Using translate3d for hardware acceleration
+            target.style.transform = `translate3d(${moveX}px, ${moveY}px, 0) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        // Interactive scanning line simulation
+        setInterval(() => {
+            const scan = document.querySelector('.scanline-overlay');
+            if (scan) {
+                scan.style.opacity = (0.8 + Math.random() * 0.2).toString();
+            }
+        }, 100);
+
+        // Click interaction for active state
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                navLinks.forEach(l => {
+                    l.classList.remove('text-primary-fixed-dim', 'border-b-2', 'border-primary-fixed-dim', 'pb-1');
+                    l.classList.add('text-on-surface-variant');
+                });
+                link.classList.add('text-primary-fixed-dim', 'border-b-2', 'border-primary-fixed-dim', 'pb-1');
+                link.classList.remove('text-on-surface-variant');
+            });
+        });
+    </script>
+</body></html>

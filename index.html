@@ -1,209 +1,260 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Abdallah Mohamed — Software Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- CURSOR -->
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-trail" id="cursorTrail"></div>
+  <div class="scanline-overlay" aria-hidden="true"></div>
+  <div class="grid-bg" aria-hidden="true"></div>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <span class="nav-logo">abdallah.dev</span>
-    <div class="nav-right">
+  <header class="site-header" id="nav">
+    <nav class="nav-inner">
+      <a href="#hero" class="nav-logo">abdallah.dev</a>
       <ul class="nav-links">
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="#deployments" class="nav-link">Systems</a></li>
+        <li><a href="#pipeline" class="nav-link">Pipeline</a></li>
+        <li><a href="#system-status" class="nav-link">Research</a></li>
+        <li><a href="#contact" class="nav-link">Terminal</a></li>
       </ul>
-      <div class="nav-social">
-        <a href="https://github.com/bp0u" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+      <div class="nav-actions">
+        <a href="https://github.com/bp0u" class="nav-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined">code</span>
         </a>
-        <a href="https://www.linkedin.com/in/abdallah-mohamed-2a81b02ba/" target="_blank" rel="noopener" title="LinkedIn" aria-label="LinkedIn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <a href="https://linkedin.com/in/abdallah-mohamed" class="nav-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined">person</span>
         </a>
+        <a href="mailto:xabdull2ah@gmail.com" class="btn btn-outline btn-sm">Deploy</a>
       </div>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-        <span class="icon-sun">☀️</span>
-        <span class="icon-moon">🌙</span>
-      </button>
-    </div>
-  </nav>
+    </nav>
+  </header>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-bg-grid"></div>
-    <div class="hero-blob blob-1"></div>
-    <div class="hero-blob blob-2"></div>
-    <div class="hero-content">
-      <div class="hero-left">
-        <p class="hero-eyebrow fade-up">Software Engineer</p>
-        <h1 class="hero-name fade-up" style="--delay:0.1s">
-          Abdallah<br><em>Mohamed</em>
-        </h1>
-        <p class="hero-role fade-up" style="--delay:0.2s">
-          Senior software engineering student — building clean,<br>purposeful software that solves real problems.
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="hero">
+      <div class="parallax-container" aria-hidden="true">
+        <div class="parallax-target">
+          <img
+            class="robot-hero"
+            src="assets/robot-hero.png"
+            alt="Futuristic humanoid robot bust with glowing cyan eyes"
+            width="896"
+            height="896"
+          />
+        </div>
+      </div>
+
+      <div class="hero-pipeline hero-pipeline-left" aria-hidden="true">
+        <div class="pipeline-node" style="top: 25%"></div>
+        <div class="pipeline-node" style="top: 75%"></div>
+      </div>
+      <div class="hero-pipeline hero-pipeline-right" aria-hidden="true">
+        <div class="pipeline-node" style="top: 33%"></div>
+        <div class="pipeline-node" style="top: 66%"></div>
+      </div>
+
+      <div class="hero-content">
+        <div class="status-badge fade-up">
+          <span class="status-dot"></span>
+          <span>Core Protocol v4.8.7</span>
+        </div>
+        <h1 class="hero-title fade-up" style="--delay:0.1s">Abdallah<br>Mohamed</h1>
+        <p class="hero-subtitle fade-up" style="--delay:0.2s">
+          The intersection of autonomous logic and structural precision. Building clean, purposeful software that solves real problems.
         </p>
         <div class="hero-actions fade-up" style="--delay:0.3s">
-          <a href="#contact" class="btn btn-solid">Get in touch</a>
-          <a href="#projects" class="btn btn-outline">View my work</a>
-          <a href="https://github.com/bp0u" target="_blank" rel="noopener" class="btn btn-outline btn-icon">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.461-1.11-1.461-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-            GitHub
-          </a>
+          <a href="#pipeline" class="btn btn-primary">Access Archives</a>
+          <a href="#system-status" class="btn btn-secondary">System Diagnostics</a>
         </div>
       </div>
-      <div class="hero-right fade-up" style="--delay:0.25s">
-        <div class="hero-card">
-          <div class="card-glow"></div>
-          <div class="avatar">AM</div>
-          <p class="card-name">Abdallah Mohamed</p>
-          <p class="card-sub">Senior SE Student</p>
-          <div class="card-stats">
-            <div class="card-stat">
-              <span class="stat-label">Status</span>
-              <span class="stat-value status-open">Open to work</span>
-            </div>
-            <div class="card-stat">
-              <span class="stat-label">Email</span>
-              <span class="stat-value">xabdull2ah@gmail</span>
-            </div>
-            <div class="card-stat">
-              <span class="stat-label">GitHub</span>
-              <span class="stat-value">bp0u</span>
-            </div>
+    </section>
+
+    <!-- CURRENT DEPLOYMENTS -->
+    <section id="deployments" class="section">
+      <div class="section-heading fade-up">
+        <h2 class="section-title">Current_Deployments</h2>
+        <div class="section-divider">
+          <span class="section-divider-node"></span>
+        </div>
+      </div>
+
+      <div class="deployments-grid fade-up">
+        <article class="deployment-card deployment-card--feature">
+          <div class="deployment-card-bg" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuClhPXy3k-TXfINgrpBz6Ma69mjh11BNhtv_JLMQXbL4k6HFelKx7DEjT0ExNXYOT333ZOCTB5NPfKDeA12n8cwgEgjyxyjuZ2epiA8b3KlxO6UX8SnurTSUPtTARguMz_IBj_viDYVPJIDQwSkD-5lNau0QW26KO2ySfH2cOKzP7HWvuZC7RF8TNzZVCWqd_BRvRFN0LWJP_WMeKZl_rngbij-nejja-km-1sHmTeqSuFYgwNEzLnXXRjI3l38ORyyKC_rmQxHig')"></div>
+          <div class="deployment-card-body">
+            <span class="status-chip status-chip--purple">Active Node</span>
+            <h3 class="deployment-card-title">SmartHealth Checker</h3>
+            <p class="deployment-card-desc">AI-powered disease prediction from symptoms — machine learning model with a clean, accessible interface.</p>
           </div>
-        </div>
-      </div>
-    </div>
-    <a href="#about" class="scroll-hint" aria-label="Scroll down">
-      <span>scroll</span>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-    </a>
-  </section>
+          <span class="material-symbols-outlined deployment-card-icon">sensors</span>
+        </article>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="section-header fade-up">
-      <span class="section-num">01</span>
-      <h2 class="section-title">About</h2>
-      <div class="section-divider"></div>
-    </div>
-    <div class="about-grid">
-      <div class="about-text fade-up">
-        <p class="about-lead">I'm a senior software engineering student with a passion for building clean, scalable, and user-friendly software.</p>
-        <p>I enjoy tackling complex problems and turning them into elegant solutions. Whether it's a backend system or a polished frontend — I care deeply about the craft.</p>
-        <p>Currently seeking opportunities to grow, contribute, and work alongside talented teams.</p>
-      </div>
-      <div class="about-facts fade-up" style="--delay:0.15s">
-        <div class="fact-row"><span class="fact-label">Name</span><span class="fact-value">Abdallah Mohamed</span></div>
-        <div class="fact-row"><span class="fact-label">Role</span><span class="fact-value">Software Engineering Student</span></div>
-        <div class="fact-row"><span class="fact-label">Email</span><span class="fact-value"><a href="mailto:xabdull2ah@gmail.com">xabdull2ah@gmail.com</a></span></div>
-        <div class="fact-row"><span class="fact-label">GitHub</span><span class="fact-value"><a href="https://github.com/bp0u" target="_blank" rel="noopener">github.com/bp0u</a></span></div>
-        <div class="fact-row"><span class="fact-label">LinkedIn</span><span class="fact-value"><a href="https://www.linkedin.com/in/abdallah-mohamed-2a81b02ba/" target="_blank" rel="noopener">linkedin.com/in/abdallah-mohamed</a></span></div>
-        <div class="fact-row"><span class="fact-label">Availability</span><span class="fact-value available">Open to opportunities</span></div>
-      </div>
-    </div>
-  </section>
+        <div class="deployment-stack">
+          <article class="deployment-card deployment-card--small">
+            <div class="deployment-card-head">
+              <span class="material-symbols-outlined">memory</span>
+              <span class="deployment-index">001</span>
+            </div>
+            <div>
+              <h3 class="deployment-card-title">Languages</h3>
+              <p class="deployment-card-desc">JavaScript · Python · Java · SQL</p>
+            </div>
+          </article>
+          <article class="deployment-card deployment-card--small">
+            <div class="deployment-card-head">
+              <span class="material-symbols-outlined">precision_manufacturing</span>
+              <span class="deployment-index">002</span>
+            </div>
+            <div>
+              <h3 class="deployment-card-title">Frameworks</h3>
+              <p class="deployment-card-desc">React · Node.js · Express · REST APIs</p>
+            </div>
+          </article>
+        </div>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="section-header fade-up">
-      <span class="section-num">02</span>
-      <h2 class="section-title">Skills</h2>
-      <div class="section-divider"></div>
-    </div>
-    <div class="skills-categories">
-      <div class="skill-group fade-up">
-        <p class="skill-group-title">Languages</p>
-        <div class="skill-list">
-          <div class="skill-item" data-level="90"><span class="skill-name">JavaScript</span><div class="skill-bar"><div class="skill-fill" style="--pct:90%"></div></div></div>
-          <div class="skill-item" data-level="80"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" style="--pct:80%"></div></div></div>
-          <div class="skill-item" data-level="75"><span class="skill-name">Java</span><div class="skill-bar"><div class="skill-fill" style="--pct:75%"></div></div></div>
-          <div class="skill-item" data-level="70"><span class="skill-name">SQL</span><div class="skill-bar"><div class="skill-fill" style="--pct:70%"></div></div></div>
-        </div>
-      </div>
-      <div class="skill-group fade-up" style="--delay:0.1s">
-        <p class="skill-group-title">Frameworks</p>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-name">React</span><div class="skill-bar"><div class="skill-fill" style="--pct:85%"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Node.js</span><div class="skill-bar"><div class="skill-fill" style="--pct:80%"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Express</span><div class="skill-bar"><div class="skill-fill" style="--pct:78%"></div></div></div>
-          <div class="skill-item"><span class="skill-name">REST APIs</span><div class="skill-bar"><div class="skill-fill" style="--pct:82%"></div></div></div>
-        </div>
-      </div>
-      <div class="skill-group fade-up" style="--delay:0.2s">
-        <p class="skill-group-title">Tools</p>
-        <div class="skill-list">
-          <div class="skill-item"><span class="skill-name">Git & GitHub</span><div class="skill-bar"><div class="skill-fill" style="--pct:88%"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Linux</span><div class="skill-bar"><div class="skill-fill" style="--pct:72%"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Data Structures</span><div class="skill-bar"><div class="skill-fill" style="--pct:85%"></div></div></div>
-          <div class="skill-item"><span class="skill-name">Algorithms</span><div class="skill-bar"><div class="skill-fill" style="--pct:80%"></div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <article class="deployment-card deployment-card--terminal">
+          <h3 class="deployment-card-title">Terminal_Output</h3>
+          <div class="terminal-lines">
+            <p>&gt; init search_sequence...</p>
+            <p>&gt; node_883 connection established</p>
+            <p>&gt; downloading neural_maps [77%]</p>
+          </div>
+        </article>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="section-header fade-up">
-      <span class="section-num">03</span>
-      <h2 class="section-title">Projects</h2>
-      <div class="section-divider"></div>
-    </div>
-    <div class="projects-grid" id="projectsGrid">
-      <!-- Loaded dynamically from projects.json -->
-    </div>
-  </section>
+        <article class="deployment-card deployment-card--wide">
+          <div class="deployment-card-bg deployment-card-bg--dim" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCLPsARoMhCyWVkTnrzwpJGxNdxXR_M-GfvEokzmoniBAqewiCjL4iNWJ9W--s8V0li8Lc_Ceep8hzXBL926dsCvcNdvtM1diZVqyBc8sHyvyD4FmWWFZuWtExtZBXU6vqEfQvqovyG5K42i8xSj9ebTgxndpP8GWU6Loie0Bc7iiw0mUQTJwSjQgI2Cl7xiBhTnRJ2iAq7oBWRt0oRay_HY0ZFQlX2wO7x4-SBuZHTQG7bVWEsaMrqEOS72J4tlZENfdeRgL_32A')"></div>
+          <div class="deployment-card-wide-inner">
+            <div class="deployment-wide-top">
+              <h3 class="deployment-card-title">Autonomous_Grid Management</h3>
+              <span class="material-symbols-outlined deployment-wide-icon">grid_view</span>
+            </div>
+            <a href="#pipeline" class="btn btn-outline btn-sm">View Specs</a>
+          </div>
+        </article>
+      </div>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="section-header fade-up">
-      <span class="section-num">04</span>
-      <h2 class="section-title">Contact</h2>
-      <div class="section-divider"></div>
-    </div>
-    <div class="contact-grid">
-      <div class="fade-up">
-        <p class="contact-tagline">Let's build something great together.</p>
-        <div class="contact-cta">
-          <a href="mailto:xabdull2ah@gmail.com" class="btn btn-light">Send email</a>
-          <a href="https://www.linkedin.com/in/abdallah-mohamed-2a81b02ba/" target="_blank" rel="noopener" class="btn btn-ghost">LinkedIn</a>
+    <!-- SYSTEM STATUS -->
+    <section id="system-status" class="section">
+      <div class="section-heading section-heading--accent fade-up">
+        <div class="section-heading-accent"></div>
+        <div>
+          <h2 class="section-title">System_Status</h2>
+          <p class="section-desc">Real-time telemetry and hardware validation logs.</p>
         </div>
       </div>
-      <div class="contact-links fade-up" style="--delay:0.15s">
-        <div class="contact-row">
+
+      <div class="status-table-wrap fade-up">
+        <table class="status-table">
+          <thead>
+            <tr>
+              <th>Module_ID</th>
+              <th>Status</th>
+              <th>Load</th>
+              <th>Latency</th>
+              <th>Runtime</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CORE_LOGIC_V4</td>
+              <td><span class="status-chip status-chip--active">Operational</span></td>
+              <td>14.2%</td>
+              <td>0.02ms</td>
+              <td>142:22:04</td>
+            </tr>
+            <tr>
+              <td>SPATIAL_SENSE_B</td>
+              <td><span class="status-chip status-chip--syncing">Syncing</span></td>
+              <td>68.9%</td>
+              <td>4.10ms</td>
+              <td>00:12:45</td>
+            </tr>
+            <tr>
+              <td>HAPTIC_FEEDBACK</td>
+              <td><span class="status-chip status-chip--active">Operational</span></td>
+              <td>05.1%</td>
+              <td>0.01ms</td>
+              <td>892:10:12</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PIPELINE / PROJECTS -->
+    <section id="pipeline" class="section section-pipeline">
+      <div class="pipeline-conduit" aria-hidden="true">
+        <div class="pipeline-node" style="top: 8%"></div>
+        <div class="pipeline-node" style="top: 28%"></div>
+        <div class="pipeline-node" style="top: 48%"></div>
+        <div class="pipeline-node" style="top: 68%"></div>
+        <div class="pipeline-node" style="top: 88%"></div>
+      </div>
+
+      <div class="pipeline-header fade-up">
+        <h2 class="section-title section-title--cyan">Project_Archive</h2>
+        <p class="pipeline-meta">NODE_LATENCY: 12ms | STATUS: CONNECTED</p>
+      </div>
+
+      <div class="project-feed" id="projectFeed"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="section-heading section-heading--accent fade-up">
+        <div class="section-heading-accent"></div>
+        <div>
+          <h2 class="section-title">Network_Node</h2>
+          <p class="section-desc">Establish a secure connection.</p>
+        </div>
+      </div>
+      <div class="contact-grid fade-up">
+        <a href="mailto:xabdull2ah@gmail.com" class="contact-card">
+          <span class="material-symbols-outlined">mail</span>
           <span class="contact-label">Email</span>
-          <a href="mailto:xabdull2ah@gmail.com" class="contact-value">xabdull2ah@gmail.com</a>
-        </div>
-        <div class="contact-row">
+          <span class="contact-value">xabdull2ah@gmail.com</span>
+        </a>
+        <a href="https://github.com/bp0u" target="_blank" rel="noopener" class="contact-card">
+          <span class="material-symbols-outlined">code</span>
           <span class="contact-label">GitHub</span>
-          <a href="https://github.com/bp0u" target="_blank" rel="noopener" class="contact-value">github.com/bp0u</a>
-        </div>
-        <div class="contact-row">
+          <span class="contact-value">github.com/bp0u</span>
+        </a>
+        <a href="https://www.linkedin.com/in/abdallah-mohamed-2a81b02ba/" target="_blank" rel="noopener" class="contact-card">
+          <span class="material-symbols-outlined">hub</span>
           <span class="contact-label">LinkedIn</span>
-          <a href="https://www.linkedin.com/in/abdallah-mohamed-2a81b02ba/" target="_blank" rel="noopener" class="contact-value">linkedin.com/in/abdallah-mohamed</a>
-        </div>
+          <span class="contact-value">linkedin.com/in/abdallah-mohamed</span>
+        </a>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <span>© 2026 Abdallah Mohamed</span>
-    <div class="footer-links">
-      <a href="https://github.com/bp0u" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://www.linkedin.com/in/abdallah-mohamed-2a81b02ba/" target="_blank" rel="noopener">LinkedIn</a>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="footer-logo">abdallah.dev</span>
+        <p>© 2026 Abdallah Mohamed. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#contact">Terminal_Access</a>
+        <a href="#system-status">System_Status</a>
+        <a href="#contact">Network_Node</a>
+      </div>
+      <div class="footer-icons">
+        <a href="https://github.com/bp0u" target="_blank" rel="noopener" aria-label="GitHub">
+          <span class="material-symbols-outlined">share</span>
+        </a>
+        <a href="mailto:xabdull2ah@gmail.com" aria-label="Email">
+          <span class="material-symbols-outlined">database</span>
+        </a>
+      </div>
     </div>
   </footer>
 

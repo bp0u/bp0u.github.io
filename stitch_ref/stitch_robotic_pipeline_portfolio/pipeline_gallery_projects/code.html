@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=JetBrains+Mono:wght@400;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=jetbrainsMono:wght@100..900&amp;family=sora:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#3b494b",
+                    "on-primary": "#00363a",
+                    "on-surface": "#e1e1ef",
+                    "tertiary-fixed": "#e2e1f1",
+                    "tertiary": "#f7f4ff",
+                    "surface": "#11131c",
+                    "tertiary-fixed-dim": "#c6c5d4",
+                    "on-tertiary-container": "#5d5e6b",
+                    "surface-container-high": "#282933",
+                    "on-tertiary-fixed-variant": "#454652",
+                    "surface-container-highest": "#32343e",
+                    "inverse-surface": "#e1e1ef",
+                    "surface-bright": "#373943",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#74009f",
+                    "outline": "#849495",
+                    "on-surface-variant": "#b9cacb",
+                    "error-container": "#93000a",
+                    "error": "#ffb4ab",
+                    "secondary-fixed-dim": "#ebb2ff",
+                    "tertiary-container": "#d9d8e8",
+                    "on-primary-container": "#006970",
+                    "secondary-container": "#b600f8",
+                    "primary-container": "#00f0ff",
+                    "background": "#11131c",
+                    "on-primary-fixed-variant": "#004f54",
+                    "on-tertiary": "#2f303b",
+                    "surface-variant": "#32343e",
+                    "secondary": "#ebb2ff",
+                    "inverse-on-surface": "#2e303a",
+                    "on-tertiary-fixed": "#1a1b26",
+                    "primary": "#dbfcff",
+                    "surface-container-low": "#191b24",
+                    "surface-container-lowest": "#0c0e17",
+                    "inverse-primary": "#006970",
+                    "primary-fixed-dim": "#00dbe9",
+                    "surface-tint": "#00dbe9",
+                    "on-background": "#e1e1ef",
+                    "secondary-fixed": "#f8d8ff",
+                    "on-secondary": "#520072",
+                    "surface-container": "#1d1f29",
+                    "on-primary-fixed": "#002022",
+                    "on-secondary-container": "#fff6fc",
+                    "primary-fixed": "#7df4ff",
+                    "on-secondary-fixed": "#320047",
+                    "surface-dim": "#11131c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "unit": "4px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "headline-xl": ["sora"],
+                    "body-lg": ["jetbrainsMono"],
+                    "headline-lg-mobile": ["sora"],
+                    "body-md": ["jetbrainsMono"],
+                    "label-sm": ["jetbrainsMono"],
+                    "headline-lg": ["sora"],
+                    "headline-md": ["sora"]
+            },
+            "fontSize": {
+                    "headline-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["15px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "600"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        body {
+            background-color: #11131c;
+            background-image: 
+                linear-gradient(rgba(0, 219, 233, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 219, 233, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            overflow-x: hidden;
+        }
+
+        .pipeline-conduit {
+            position: fixed;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100vh;
+            background: linear-gradient(to bottom, transparent, #00dbe9, #b600f8, #00dbe9, transparent);
+            box-shadow: 0 0 15px rgba(0, 219, 233, 0.4);
+            z-index: 10;
+        }
+
+        .pipeline-node {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: #00dbe9;
+            border: 2px solid #11131c;
+            box-shadow: 0 0 10px #00dbe9;
+            z-index: 11;
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .corner-bracket {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: #00dbe9;
+        }
+        .bracket-tl { top: 0; left: 0; border-top: 2px solid; border-left: 2px solid; }
+        .bracket-tr { top: 0; right: 0; border-top: 2px solid; border-right: 2px solid; }
+        .bracket-bl { bottom: 0; left: 0; border-bottom: 2px solid; border-left: 2px solid; }
+        .bracket-br { bottom: 0; right: 0; border-bottom: 2px solid; border-right: 2px solid; }
+
+        .scanline {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 219, 233, 0.1);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            from { top: 0; }
+            to { top: 100%; }
+        }
+
+        .flicker:hover {
+            animation: flicker-anim 0.2s infinite;
+        }
+
+        @keyframes flicker-anim {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.9; }
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Header / TopNavBar -->
+<header class="bg-surface/80 dark:bg-surface/80 backdrop-blur-md font-body-md text-body-md docked full-width top-0 sticky border-b border-outline-variant/30 shadow-[0_0_15px_rgba(0,219,233,0.1)] z-50">
+<div class="flex justify-between items-center w-full px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold tracking-tighter text-primary-fixed-dim">
+                AERO_BOTICS
+            </div>
+<nav class="hidden md:flex gap-8">
+<a class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors" href="#">Systems</a>
+<a class="text-primary-fixed-dim border-b-2 border-primary-fixed-dim pb-1" href="#">Pipeline</a>
+<a class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors" href="#">Research</a>
+<a class="text-on-surface-variant hover:text-primary-fixed-dim transition-colors" href="#">Terminal</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed-dim transition-all">settings_input_component</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary-fixed-dim transition-all">terminal</button>
+<button class="px-4 py-2 border border-primary-fixed-dim text-primary-fixed-dim font-label-sm text-label-sm hover:bg-primary-fixed-dim/10 transition-all flicker">
+                    Deploy
+                </button>
+</div>
+</div>
+</header>
+<!-- Background Animation Shader -->
+<div class="fixed inset-0 pointer-events-none opacity-20">
+
+</div>
+<!-- Central Pipeline Conduit -->
+<div class="pipeline-conduit">
+<div class="pipeline-node top-[100px]"></div>
+<div class="pipeline-node top-[400px]"></div>
+<div class="pipeline-node top-[700px]"></div>
+<div class="pipeline-node top-[1000px]"></div>
+<div class="pipeline-node top-[1300px]"></div>
+</div>
+<main class="relative z-20 pt-20 pb-32">
+<div class="max-w-container-max mx-auto px-margin-desktop">
+<div class="text-center mb-32 scroll-reveal">
+<h1 class="font-headline-xl text-headline-xl text-primary-fixed-dim mb-4">PROJECT_ARCHIVE</h1>
+<p class="font-label-sm text-label-sm tracking-widest text-on-surface-variant">NODE_LATENCY: 12ms | STATUS: CONNECTED</p>
+</div>
+<!-- Project Feed -->
+<div class="flex flex-col gap-40 relative">
+<!-- Project AVALON -->
+<div class="scroll-reveal grid grid-cols-1 md:grid-cols-2 gap- gutter items-center">
+<div class="md:pr-16 text-right order-1">
+<div class="mb-2">
+<span class="font-label-sm text-label-sm text-secondary px-2 py-1 bg-secondary/10 border border-secondary/20">CLASS_01</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Project AVALON</h2>
+<div class="space-y-4 text-on-surface-variant font-body-md">
+<p>Deep-sea autonomous mapping unit with real-time sonar translation and neural-network navigation.</p>
+<div class="bg-on-tertiary-fixed/30 p-4 border-r-2 border-primary-fixed-dim font-label-sm text-label-sm text-left">
+<p>TECH_SPEC: LI-ION_CORE_9000</p>
+<p>INTERFACE: DUAL_OPTIC_LINK</p>
+<p>ENCRYPTION: QUANTUM_AES_512</p>
+</div>
+</div>
+<button class="mt-6 px-8 py-3 bg-primary-fixed-dim text-on-primary-fixed font-label-sm font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(0,219,233,0.6)] transition-all flicker">
+                            View Protocol
+                        </button>
+</div>
+<div class="relative group order-2">
+<div class="pipeline-horizontal absolute left-[-120px] top-1/2 w-[120px] h-[2px] bg-primary-fixed-dim hidden md:block">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary-fixed-dim rotate-45"></div>
+</div>
+<div class="relative p-1 border border-outline-variant/50 bg-surface-container-low overflow-hidden">
+<div class="corner-bracket bracket-tl"></div>
+<div class="corner-bracket bracket-tr"></div>
+<div class="corner-bracket bracket-bl"></div>
+<div class="corner-bracket bracket-br"></div>
+<div class="scanline"></div>
+<img class="w-full aspect-video object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A highly detailed industrial robot submersible designed with glowing cyan conduits and exposed hydraulic cabling, floating in a dark, high-tech engineering laboratory. The lighting is cold and atmospheric, with sharp neon accents highlighting the metallic textures and precision sensors. Digital HUD elements are overlaid on the camera lens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBiN9Sw8ZzC5MUW_4_-SAxbF7WjmNu_1zUABRc7ufwQqe4Yfma91c6N1g-mFnUTV6GmHbKoz6lu0k6EkFnJSGcw0dTRxI165wLgy4cV54D3yPcHepYUEPo8EfG5PgsXblsRrfaczGUE8aQRKgMCzOOj1Tkdu2zX_WHzH6hM4A2wmWiy6bCMtOk5qETKseLi4bPj49JSgzL_bBNRAwImEUQM0940ONVA2nNu3mqCNFlgC1BGeZgJP-n-NmtXF68CKYtSdFzMhKiRQw"/>
+</div>
+</div>
+</div>
+<!-- Project SYNERGY_LINK -->
+<div class="scroll-reveal grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="relative group order-2 md:order-1">
+<div class="pipeline-horizontal absolute right-[-120px] top-1/2 w-[120px] h-[2px] bg-secondary hidden md:block">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-secondary rotate-45"></div>
+</div>
+<div class="relative p-1 border border-outline-variant/50 bg-surface-container-low overflow-hidden">
+<div class="corner-bracket bracket-tl"></div>
+<div class="corner-bracket bracket-tr"></div>
+<div class="corner-bracket bracket-bl"></div>
+<div class="corner-bracket bracket-br"></div>
+<div class="scanline"></div>
+<img class="w-full aspect-video object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A futuristic multi-agent swarm of small, sleek flying drones connected by luminous purple data beams in a sterile, white industrial testing facility. The scene is shot from a low angle, emphasizing the organized chaos of the robotic flight paths. High-contrast lighting creates dramatic shadows against the dark ceiling panels." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlsxmqjfERY-GgsHf_x0mxSF3Wk7COtVQu-v5dQ7TUywEl_6vS2KcBH2gx3zilB4Tb-AX2mwAoCwAY8GJge7J7ujoSsSgcbrDt26DDDOx9MixNyOWSnORFfqvhWAY6gRKxFM4iJFeBE6A_npsd13hjOnrc2OSwcnlJKX0HvanpiAJEluhXcRO7ciJf7HsVJLme4MMRHbZIcP4aNCeLXr07FaSfXDYJgpVZN-sHkWZRkArNJGNI4cN7dNx9usW0piDa3V-jlVyXxw"/>
+</div>
+</div>
+<div class="md:pl-16 text-left order-1 md:order-2">
+<div class="mb-2">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim px-2 py-1 bg-primary/10 border border-primary/20">CLASS_04</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">SYNERGY_LINK</h2>
+<div class="space-y-4 text-on-surface-variant font-body-md">
+<p>Multi-agent swarm intelligence platform enabling cooperative task execution in high-risk zones.</p>
+<div class="bg-on-tertiary-fixed/30 p-4 border-l-2 border-secondary font-label-sm text-label-sm">
+<p>SWARM_COUNT: 256_UNITS</p>
+<p>LATENCY: 0.04ms</p>
+<p>PROTOCOL: HIVE_MESH_v4</p>
+</div>
+</div>
+<button class="mt-6 px-8 py-3 bg-secondary text-on-secondary font-label-sm font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(182,0,248,0.6)] transition-all flicker">
+                            View Protocol
+                        </button>
+</div>
+</div>
+<!-- Project VOID_CORE -->
+<div class="scroll-reveal grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="md:pr-16 text-right order-1">
+<div class="mb-2">
+<span class="font-label-sm text-label-sm text-error px-2 py-1 bg-error/10 border border-error/20">CLASS_EXPERIMENTAL</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">VOID_CORE</h2>
+<div class="space-y-4 text-on-surface-variant font-body-md">
+<p>Sub-atomic particle monitoring system utilizing high-precision robotic sensor arrays for zero-G environments.</p>
+<div class="bg-on-tertiary-fixed/30 p-4 border-r-2 border-error font-label-sm text-label-sm text-left">
+<p>RADIATION_SHIELD: TYPE_7</p>
+<p>SENSOR_PRECISION: 1.2nm</p>
+<p>COOLING: LIQUID_HELIUM</p>
+</div>
+</div>
+<button class="mt-6 px-8 py-3 border border-error text-error font-label-sm font-bold uppercase tracking-widest hover:bg-error/10 transition-all">
+                            View Protocol
+                        </button>
+</div>
+<div class="relative group order-2">
+<div class="pipeline-horizontal absolute left-[-120px] top-1/2 w-[120px] h-[2px] bg-error hidden md:block">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-error rotate-45"></div>
+</div>
+<div class="relative p-1 border border-outline-variant/50 bg-surface-container-low overflow-hidden">
+<div class="corner-bracket bracket-tl"></div>
+<div class="corner-bracket bracket-tr"></div>
+<div class="corner-bracket bracket-bl"></div>
+<div class="corner-bracket bracket-br"></div>
+<div class="scanline"></div>
+<img class="w-full aspect-video object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="A massive, complex reactor core pulsing with red thermal energy, surrounded by robotic arms performing maintenance in a dark hangar. The atmosphere is dense with steam and sparks, captured in a gritty, cinematic style. The design emphasizes heavy machinery, thick armored cables, and high-tech industrial brutalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5xokF4cTHdYcOoHOeBS1kX5HjwNAoCXmj85ucfFiR7yEdW5XKDv4x6cAVwk8Vt6svpXgiicCqxkmdp8QiE1cKDEkarm4xXLlBEP1PcAMPNJeT1FbfAIt--G-rwFFS0EYsTP5rFnqtMDTq78S6gECpYYB9cUNMxtt_sVh4y9LFG7HZC4Y44Z2lZcjZqUdX_pjsUW9bGvNK2_SKXGwzAyeAbXUwjT99lq-XSWJAZPCF8PVRTg1TVcPUv45L_aW7c9muz_1_dWyU0g"/>
+</div>
+</div>
+</div>
+<!-- Project ORION_GATE -->
+<div class="scroll-reveal grid grid-cols-1 md:grid-cols-2 gap-gutter items-center">
+<div class="relative group order-2 md:order-1">
+<div class="pipeline-horizontal absolute right-[-120px] top-1/2 w-[120px] h-[2px] bg-primary-fixed-dim hidden md:block">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary-fixed-dim rotate-45"></div>
+</div>
+<div class="relative p-1 border border-outline-variant/50 bg-surface-container-low overflow-hidden">
+<div class="corner-bracket bracket-tl"></div>
+<div class="corner-bracket bracket-tr"></div>
+<div class="corner-bracket bracket-bl"></div>
+<div class="corner-bracket bracket-br"></div>
+<div class="scanline"></div>
+<img class="w-full aspect-video object-cover grayscale group-hover:grayscale-0 transition-all duration-700" data-alt="An expansive satellite communication array under a starlit sky, with robotic tracking modules aligned in perfect symmetry. The lighting is dominated by subtle moonlight and the glowing internal circuits of the machines. The visual style is technical minimalist, featuring clean lines and a sense of vast, quiet intelligence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWH5b4ctE0q47wk-5r4DRUpcaJrNt_bcu_GB77af5zgQ0hKv_THUy4r_RQehCWQqNQcdu6wmJTABwyYMZC3av8wB--57IgOyt-mQEgxCflKRCG-SmhPhsGCQRWhxpO3h__R0iQmsboUgolaLpj2x25hQmq3SZZbYEBXstroP-t2bJt3qIGx1xW6Rui8LXpxBcx6RT2If4ZAcJRwCuUWHxiEbwbmvPMuk4OimFzRWE9qwD0eoSrOutgVbZr7_G2y5D5uTwrpQbKlA"/>
+</div>
+</div>
+<div class="md:pl-16 text-left order-1 md:order-2">
+<div class="mb-2">
+<span class="font-label-sm text-label-sm text-primary-fixed-dim px-2 py-1 bg-primary/10 border border-primary/20">CLASS_09</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">ORION_GATE</h2>
+<div class="space-y-4 text-on-surface-variant font-body-md">
+<p>Global satellite uplink manager providing localized neural-network signal optimization for remote research nodes.</p>
+<div class="bg-on-tertiary-fixed/30 p-4 border-l-2 border-primary-fixed-dim font-label-sm text-label-sm">
+<p>BANDWIDTH: 100Tbps</p>
+<p>UPTIME: 99.9999%</p>
+<p>LOCATION: ORBITAL_LOW</p>
+</div>
+</div>
+<button class="mt-6 px-8 py-3 bg-primary-fixed-dim text-on-primary-fixed font-label-sm font-bold uppercase tracking-widest hover:shadow-[0_0_20px_rgba(0,219,233,0.6)] transition-all flicker">
+                            View Protocol
+                        </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest w-full py-8 border-t border-outline-variant font-label-sm text-label-sm">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop w-full max-w-container-max mx-auto text-on-surface-variant">
+<div class="font-headline-sm text-headline-sm text-primary mb-4 md:mb-0">
+                AERO_BOTICS
+            </div>
+<div class="flex gap-8 mb-4 md:mb-0">
+<a class="text-on-tertiary-container hover:text-primary-fixed-dim transition-colors" href="#">Terminal_Access</a>
+<a class="text-on-tertiary-container hover:text-primary-fixed-dim transition-colors" href="#">System_Status</a>
+<a class="text-on-tertiary-container hover:text-primary-fixed-dim transition-colors" href="#">Network_Node</a>
+</div>
+<div class="opacity-50">
+                ©2024 NEURAL_LINK INDUSTRIES. ALL RIGHTS RESERVED.
+            </div>
+</div>
+</footer>
+<script>
+        // Scroll reveal logic
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Micro-interaction: Mouse tracking for glowing nodes
+        window.addEventListener('scroll', () => {
+            const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            const conduit = document.querySelector('.pipeline-conduit');
+            // Subtle shift of the conduit gradient
+            conduit.style.background = `linear-gradient(to bottom, transparent, #00dbe9, #b600f8, #00dbe9, transparent) ${scrollPercent}%`;
+        });
+    </script>
+</body></html>
