@@ -211,7 +211,6 @@ window.addEventListener('scroll', () => {
 /* ── MOBILE MENU TOGGLE ── */
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
-const navLinks = document.querySelectorAll('.nav-link');
 
 if (menuToggle) {
   menuToggle.addEventListener('click', () => {
