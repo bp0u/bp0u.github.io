@@ -26,31 +26,5 @@
     "link": "https://eat-smart-eight.vercel.app/",
     "linkLabel": "View Protocol"
   },
-  {
-    "title": "Cybernetic Vanguard",
-    "description": "A futuristic design system and UI framework featuring a modern cybernetic aesthetic with carefully crafted color palettes, typography systems, and Material Design 3 components. Built as a comprehensive design language for high-tech applications.",
-    "tags": ["Design System", "UI Framework", "Material Design 3", "Tailwind CSS"],
-    "specs": ["THEME_ENGINE: MATERIAL_3", "COLOR_DEPTH: 48_HUE", "DEPLOY: COMPONENT_LIBRARY"],
-    "image": "stitch_ref/stitch_robotic_pipeline_portfolio/cybernetic_vanguard/DESIGN.md",
-    "link": "stitch_ref/stitch_robotic_pipeline_portfolio/cybernetic_vanguard/",
-    "linkLabel": "View Protocol"
-  },
-  {
-    "title": "AERO_BOTICS | NEURAL_ARCHITECT",
-    "description": "An interactive robotic interface featuring dynamic neural architecture visualization and real-time system diagnostics. Built with Tailwind CSS and modern web technologies for smooth animations and responsive interactions.",
-    "tags": ["HTML", "CSS", "JavaScript", "Tailwind CSS", "Interactive"],
-    "specs": ["INTERFACE: NEURAL_VIZ_v2", "ANIMATION_FPS: 60", "DEPLOY: STATIC_BUILD"],
-    "image": "stitch_ref/stitch_robotic_pipeline_portfolio/main_page_interactive_robot/screen.png",
-    "link": "stitch_ref/stitch_robotic_pipeline_portfolio/main_page_interactive_robot/code.html",
-    "linkLabel": "View Protocol"
-  },
-  {
-    "title": "Pipeline Gallery Projects",
-    "description": "A comprehensive gallery showcasing multi-disciplinary projects within an integrated pipeline architecture. Features responsive grid layouts and dynamic project loading for seamless project exploration.",
-    "tags": ["HTML", "CSS", "JavaScript", "Gallery", "Portfolio"],
-    "specs": ["GALLERY_ENGINE: GRID_LAYOUT_v3", "LOAD_STRATEGY: DYNAMIC", "DEPLOY: STATIC_BUILD"],
-    "image": "stitch_ref/stitch_robotic_pipeline_portfolio/pipeline_gallery_projects/screen.png",
-    "link": "stitch_ref/stitch_robotic_pipeline_portfolio/pipeline_gallery_projects/code.html",
-    "linkLabel": "View Protocol"
-  }
+
 ]
