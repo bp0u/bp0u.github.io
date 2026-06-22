@@ -191,6 +191,76 @@ window.addEventListener('scroll', () => {
   progressBar.style.width = pct + '%';
 }, { passive: true });
 
+/* ── MOBILE MENU TOGGLE ── */
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('navMenu');
+const navLinks = document.querySelectorAll('.nav-link');
+
+if (menuToggle) {
+  menuToggle.addEventListener('click', () => {
+    const isActive = menuToggle.classList.contains('active');
+    menuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', !isActive);
+  });
+
+  // Close menu when a link is clicked
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-inner')) {
+      menuToggle.classList.remove('active');
+      navMenu.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+/* ── TOUCH PARALLAX ── */
+if (parallaxTarget && !prefersReducedMotion) {
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  });
+
+  document.addEventListener('touchmove', (e) => {
+    const touchX = e.touches[0].clientX;
+    const touchY = e.touches[0].clientY;
+    const moveX = (touchX - touchStartX) / 50;
+    const moveY = (touchY - touchStartY) / 50;
+    
+    if (heroSection && heroSection.getBoundingClientRect().top < window.innerHeight) {
+      parallaxTarget.style.transform = `translate3d(${moveX}px, ${moveY}px, 0)`;
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => {
+    if (heroSection && heroSection.getBoundingClientRect().top < window.innerHeight) {
+      parallaxTarget.style.transform = 'translate3d(0, 0, 0)';
+    }
+  }, { passive: true });
+}
+
+/* ── PREVENT ZOOM ON DOUBLE TAP (BETTER MOBILE UX) ── */
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+  const now = Date.now();
+  if (now - lastTouchEnd <= 300) {
+    e.preventDefault();
+  }
+  lastTouchEnd = now;
+}, false);
+
 /* ── INIT ── */
 loadProjects();
 

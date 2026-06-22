@@ -171,6 +171,42 @@ a {
   background: rgba(0, 219, 233, 0.1);
 }
 
+/* ── MOBILE MENU TOGGLE ── */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--on-surface-variant);
+  border-radius: 1px;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* ── BUTTONS ── */
 .btn {
   display: inline-flex;
@@ -203,6 +239,11 @@ a {
   box-shadow: 0 0 25px rgba(0, 219, 233, 0.5);
 }
 
+.btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 15px rgba(0, 219, 233, 0.3);
+}
+
 .btn-secondary {
   background: transparent;
   color: var(--on-surface-variant);
@@ -223,6 +264,10 @@ a {
 .btn-outline:hover {
   background: var(--primary-fixed-dim);
   color: var(--surface);
+}
+
+.btn-outline:active {
+  transform: scale(0.98);
 }
 
 .btn-purple {
@@ -1238,6 +1283,10 @@ body.js-loaded .fade-up.visible {
 }
 
 @media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
   .nav-inner {
     padding: 1rem var(--margin-mobile);
     flex-wrap: wrap;
@@ -1249,9 +1298,25 @@ body.js-loaded .fade-up.visible {
     justify-content: center;
     gap: 1.25rem;
     flex-wrap: wrap;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
   }
 
-  .nav-link { font-size: 13px; }
+  .nav-links.active {
+    max-height: 500px;
+    padding: 1rem 0;
+  }
+
+  .nav-link { 
+    font-size: 13px;
+    display: block;
+    padding: 12px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .hero {
     padding: 7rem var(--margin-mobile) 3rem;
@@ -1306,6 +1371,24 @@ body.js-loaded .fade-up.visible {
 
 @media (max-width: 560px) {
   .nav-actions .nav-icon { display: none; }
+
+  .btn {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 12px 32px;
+    font-size: 11px;
+  }
+
+  .btn-sm {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 20px;
+  }
+
+  .nav-link {
+    padding: 14px !important;
+    min-height: 48px !important;
+  }
 
   .hero-actions {
     flex-direction: column;
