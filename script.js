@@ -50,11 +50,26 @@ function observeRevealElements(root = document) {
 /* ── LOAD PROJECTS FROM projects.json ── */
 async function loadProjects() {
   const projectFeed = document.getElementById('projectFeed');
-  if (!projectFeed) return;
+  if (!projectFeed) {
+    console.error('projectFeed element not found');
+    return;
+  }
 
   try {
-    const res = await fetch('projects.json');
+    console.log('Loading projects...');
+    const res = await fetch('projects.json?t=' + Date.now());
+    
+    if (!res.ok) {
+      throw new Error(`HTTP error! status: ${res.status}`);
+    }
+
     const projects = await res.json();
+    console.log('Projects loaded:', projects.length, 'projects');
+
+    if (!projects || projects.length === 0) {
+      projectFeed.innerHTML = '<p class="project-desc" style="text-align:center;color:var(--on-surface-variant);">&gt; error: no projects found</p>';
+      return;
+    }
 
     projectFeed.innerHTML = projects.map((p, i) => {
       const reverse = i % 2 === 1;
@@ -96,14 +111,16 @@ async function loadProjects() {
       `;
     }).join('');
 
+    console.log('Projects rendered successfully');
     observeRevealElements(projectFeed);
 
   } catch (err) {
+    console.error('Failed to load projects.json:', err);
     projectFeed.innerHTML = `
       <p class="project-desc" style="text-align:center;color:var(--on-surface-variant);">
-        &gt; error: could not load projects.json
+        &gt; error: could not load projects.json<br>
+        <small style="font-size:11px;opacity:0.6;">${err.message}</small>
       </p>`;
-    console.error('Failed to load projects.json:', err);
   }
 }
 
